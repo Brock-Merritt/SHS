@@ -1,9 +1,17 @@
 import sys
-from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtGui import QIcon
 
-app = QtWidgets.QApplication(sys.argv)
-widget = QtWidgets.QWidget()
-widget.resize(400, 200)
-widget.setWindowTitle("This is PyQt Widget example")
-widget.show()
-exit(app.exec_())
+class Window(QWidget):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowIcon(QIcon("player.ico"))
+        self.setWindowTitle("PyPlater")
+        self.setGeometry(350,100, 700,500)
+
+
+app = QApplication([sys.argv])
+window = Window()
+window.show()
+sys.exit(app.exec_())
