@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QHBoxLayout, QVBoxLayout, QStyle
+from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QHBoxLayout, QVBoxLayout, QStyle, QSlider
 from PyQt5.QtGui import QIcon, QPalette
 from PyQt5.QtCore import Qt
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
@@ -30,11 +30,15 @@ class Window(QWidget):
         self.playBtn.setEnabled(False)
         self.playBtn.setIcon(self.style().standardIcon(QStyle.SP_MediaPlay))
 
+        self.slider = QSlider(Qt.Horizontal)
+        self.slider.setRange(0, 0)
+
         hbox = QHBoxLayout()
         hbox.setContentsMargins(0,0,0,0)
 
         hbox.addWidget(self.openBtn)
         hbox.addWidget(self.playBtn)
+        hbox.addWidget(self.slider)
 
         vbox = QVBoxLayout()
 
