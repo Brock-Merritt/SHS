@@ -30,6 +30,7 @@ class Window(QWidget):
         self.playBtn = QPushButton()
         self.playBtn.setEnabled(False)
         self.playBtn.setIcon(self.style().standardIcon(QStyle.SP_MediaPlay))
+        self.playBtn.clicked.connect(self.play_video())
 
         self.slider = QSlider(Qt.Horizontal)
         self.slider.setRange(0, 0)
@@ -57,7 +58,12 @@ class Window(QWidget):
             self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile(filename)))
             self.playBtn.setEnabled(True)
 
+    def play_video(self):
+        if self.mediaPlayer.state() == QMediaPlayer.PlayingState:
+            self.mediaPlayer.pause()
 
+        else:
+            self.mediaPlayer.play()
 
 app = QApplication([sys.argv])
 window = Window()
