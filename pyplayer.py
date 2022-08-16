@@ -25,6 +25,7 @@ class Window(QWidget):
         videowidget = QVideoWidget()
 
         self.openBtn = QPushButton('open video')
+        self.openBtn.clicked.connect(self.open_file)
 
         self.playBtn = QPushButton()
         self.playBtn.setEnabled(False)
@@ -49,12 +50,12 @@ class Window(QWidget):
 
         self.setLayout(vbox)
 
-def open_file(self):
-    filename, _ = QFileDialog.getOpenFileName(self, "open video")
+    def open_file(self):
+        filename, _ = QFileDialog.getOpenFileName(self, "open video")
 
-    if filename != '':
-        self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile(filename)))
-        self.playBtn.setEnabled(True)
+        if filename != '':
+            self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile(filename)))
+            self.playBtn.setEnabled(True)
 
 
 
