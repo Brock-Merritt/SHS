@@ -65,6 +65,17 @@ class Window(QWidget):
         else:
             self.mediaPlayer.play()
 
+    def mediastate_changed(self, state):
+        if self.mediaPlayer.state() == QMediaPlayer.PlayingState:
+            self.playBtn.setIcon(self.style().standardIcon(QStyle.SP_MediaPause))
+        else:
+            self.playBtn.setIcon(self.style().standardIcon(QStyle.SP_MediaPlay))
+
+    def position_changed(self, position):
+        self.slider.setValue(position)
+
+    
+
 app = QApplication([sys.argv])
 window = Window()
 window.show()
