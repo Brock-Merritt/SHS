@@ -74,7 +74,8 @@ class Window(QWidget):
     def position_changed(self, position):
         self.slider.setValue(position)
 
-    
+    def duration_changed(self, duration):
+        self.slider.setRange(0, duration)
 
 app = QApplication([sys.argv])
 window = Window()
