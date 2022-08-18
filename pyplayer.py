@@ -5,13 +5,14 @@ from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 from PyQt5.QtMultimediaWidgets import QVideoWidget
 
+
 class Window(QWidget):
     def __init__(self):
         super().__init__()
 
         self.setWindowIcon(QIcon("player.ico"))
         self.setWindowTitle("PyPlayer")
-        self.setGeometry(350,100, 700,500)
+        self.setGeometry(350, 100, 700, 500)
 
         p = self.palette()
         p.setColor(QPalette.Window, Qt.blue)
@@ -35,10 +36,8 @@ class Window(QWidget):
         self.slider = QSlider(Qt.Horizontal)
         self.slider.setRange(0, 0)
 
-
-
         hbox = QHBoxLayout()
-        hbox.setContentsMargins(0,0,0,0)
+        hbox.setContentsMargins(0, 0, 0, 0)
 
         hbox.addWidget(self.openBtn)
         hbox.addWidget(self.playBtn)
@@ -49,7 +48,13 @@ class Window(QWidget):
 
         vbox.addLayout(hbox)
 
+        self.mediaPlayer.setVideoOutput(videowidget)
+
         self.setLayout(vbox)
+
+        self.mediaPlayer.stateChanged.connect(self.mediastate_changed())
+        self.mediaPlayer.positionChanged.connect(self.position_changed())
+        self.mediaPlayer.durationChanged.connect(self.duration_changed())
 
     def open_file(self):
         filename, _ = QFileDialog.getOpenFileName(self, "open video")
@@ -77,9 +82,8 @@ class Window(QWidget):
     def duration_changed(self, duration):
         self.slider.setRange(0, duration)
 
+
 app = QApplication([sys.argv])
 window = Window()
 window.show()
 sys.exit(app.exec_())
-
-
